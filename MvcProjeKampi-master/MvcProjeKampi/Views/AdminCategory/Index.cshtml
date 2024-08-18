@@ -1,0 +1,84 @@
+﻿@using EntityLayer.Concrete
+@model List<Category>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<section class="content">
+    <div class="container-fluid">
+
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Kategori Listesi</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/AdminCategory/Index">Kategori Listesi</a></li>
+                            @*<li class="breadcrumb-item active">Contacts</li>*@
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Kategori Listesi</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead class="text-center">
+                                <tr>
+                                    <th style="width: 10px">#</th>
+                                    <th>Kategori Adı</th>
+                                    <th>Durum</th>
+                                    <th>İşlem Seçiniz</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.CategoryID</td>
+                                        <td>@item.CategoryName</td>
+
+                                        @if (item.CategoryStatus == true)
+                                        {
+                                            <td><span class="badge bg-info">Aktif</span></td>
+                                        }
+                                        else
+                                        {
+                                            <td><span class="badge bg-danger">Pasif</span></td>
+                                        }
+
+                                        <td class="project-actions">
+                                            <a class="btn btn-primary btn-sm" href="#">
+                                                <i class="fas fa-folder"> İçerik</i>
+                                            </a>
+                                            <a class="btn btn-info btn-sm" href="/AdminCategory/UpdateCategory/@item.CategoryID">
+                                                <i class="fas fa-pencil-alt"> Düzenle</i>
+                                            </a>
+                                            <a class="btn btn-danger btn-sm" href="/AdminCategory/DeleteCategory/@item.CategoryID">
+                                                <i class="fas fa-caret-square-down"> Sil</i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer clearfix">
+                        <a href="/AdminCategory/AddCategory/" class="btn btn-outline-primary col-md-12">Yeni Kategori Ekle!</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
